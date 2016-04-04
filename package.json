@@ -2,13 +2,13 @@
   "name": "gitignorer",
   "version": "0.0.1",
   "description": "Create .gitignore for you with your very own settings.",
-  "main": "index.js",
+  "main": "gitignorer.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ycmjason/gitignorer.git"
+    "url": "git://github.com/ycmjason/gitignorer.git"
   },
   "keywords": [
     "gitignore",
@@ -25,6 +25,9 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "filesys-db": "0.0.5"
+    "filesys-db": "0.1.0"
+  },
+  "bin": {
+    "gitignorer": "gitignore.js"
   }
 }
