@@ -1,8 +1,18 @@
+#!/usr/bin/env node
 'use strict';
 //Ever feel irritating when you have to create a .gitignore file with the exact same setting over and over again when you start a new project? 
+
+/* note on filesys-db schema:
+ * profiles (collection)
+ *   |- name
+ *   |- ignored_files
+ */
+
 var program = require('commander');
 
 var handlers = require('./lib/handlers'); 
+
+require('./lib/messages');
 
 program
   .version(require('./package.json').version);
@@ -15,7 +25,7 @@ program
 program
   .command('add <files...>')
   .description('Add file(s) to .gitignore')
-  .option('-t, --profile [profile]', 'add file to profile instead of .gitignore')
+  .option('-p, --profile [profile]', 'add file to profile instead of .gitignore')
   .action(handlers.add);
 
 program
@@ -35,7 +45,7 @@ program
 program
   .command('profile <name>')
   .description('Perform operation on profile base on [options]')
-  .option('-a, --add', 'create a profile')
+  .option('-c, --create', 'create a profile')
   .option('-d, --delete', 'delete a profile')
   .option('-cp, --copy <destination>', 'copy a profile to <destination> with all the settings copied')
   .option('-mv, --rename <destination>', 'rename a profile with all the settings remain')
