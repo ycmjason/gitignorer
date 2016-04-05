@@ -4,7 +4,8 @@
   "description": "Create .gitignore for you with your very own settings.",
   "main": "gitignorer.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "jshint": "jshint gitignorer.js lib/*"
   },
   "repository": {
     "type": "git",
@@ -20,14 +21,19 @@
     "url": "https://github.com/ycmjason/gitignorer/issues"
   },
   "homepage": "https://github.com/ycmjason/gitignorer#readme",
-  "devDependencies": {
-    "mocha": "^2.4.5"
-  },
   "dependencies": {
     "commander": "^2.9.0",
-    "filesys-db": "0.1.0"
+    "filesys-db": "0.1.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.1",
+    "mocha": "^2.4.5"
   },
   "bin": {
     "gitignorer": "gitignore.js"
+  },
+  "jshintConfig": {
+    "esversion": 6,
+    "node": true
   }
 }
