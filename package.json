@@ -1,6 +1,6 @@
 {
   "name": "gitignorer",
-  "version": "0.0.1",
+  "version": "v0.0.1",
   "description": "Create .gitignore for you with your very own settings.",
   "main": "gitignorer.js",
   "scripts": {
@@ -34,8 +34,7 @@
     "mocha": "^2.4.5"
   },
   "bin": {
-    "gitignorer": "gitignore.js",
-    "gitignore": "gitignore.js"
+    "gitignorer": "./gitignorer.js"
   },
   "jshintConfig": {
     "esversion": 6,
