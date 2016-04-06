@@ -1,7 +1,7 @@
 {
   "name": "gitignorer",
   "version": "v0.0.1",
-  "description": "Create .gitignore for you with your very own settings.",
+  "description": "Creates .gitignore with your very own settings.",
   "main": "gitignorer.js",
   "scripts": {
     "pretest": "rm -f .gitignore",
