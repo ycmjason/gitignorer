@@ -57,12 +57,13 @@ function main(){
     .action(handlers.list);
 
   program
-    .command('profile <name>')
+    .command('profile [name]')
     .description('Perform operation on profile base on [options]')
+    .option('-l, --list', 'list all existing profiles')
     .option('-c, --create', 'create a profile')
     .option('-d, --delete', 'delete a profile')
-    .option('-cp, --copy <destination>', 'copy a profile to <destination> with all the settings copied')
-    .option('-mv, --rename <destination>', 'rename a profile with all the settings remain')
+    .option('--copy <destination>', 'copy a profile to <destination> with all the settings copied')
+    .option('--move <destination>', 'rename a profile with all the settings remain')
     .action(handlers.profile);
 
   program.parse(process.argv);
