@@ -4,7 +4,8 @@
   "description": "Create .gitignore for you with your very own settings.",
   "main": "gitignorer.js",
   "scripts": {
-    "test": "mocha",
+    "pretest": "rm -f .gitignore",
+    "test": "mocha || exit 0",
     "posttest": "git checkout .gitignore",
     "jshint": "jshint gitignorer.js lib/*"
   },
@@ -24,7 +25,7 @@
   "homepage": "https://github.com/ycmjason/gitignorer#readme",
   "dependencies": {
     "commander": "^2.9.0",
-    "filesys-db": "0.2.0",
+    "filesys-db": "0.2.1",
     "msg-generator": "^0.1.1",
     "simple-message": "^0.2.1"
   },
