@@ -10,14 +10,14 @@ npm install -g gitignorer
 ```
 
 ## Usage
-gitignorer perform operations over  **two, and only two**, things.
+Listed below are all the operations that `gitignorer` capable to perform.
 
-1. **`.gitignore`** on your current directory
+1. **`.gitignore`**
   - [create `.gitignore` with preset profiles](#gitignore-init)
   - [add files/patterns to `.gitignore`](#gitignore-add)
   - [remove files/patterns from `.gitignore`](#gitignore-remove--rm)
   - [list files/patterns in `.gitignore`](#gitignore-list--ls)
-2. Different **profiles** that you create
+2. Profiles
   - [add files/patterns to profile](#gitignore-add)
   - [remove files/patterns from profile](#gitignore-remove--rm)
   - [list files/patterns in profile](#gitignore-list--ls)
