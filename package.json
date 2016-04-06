@@ -5,6 +5,7 @@
   "main": "gitignorer.js",
   "scripts": {
     "test": "mocha",
+    "posttest": "git checkout .gitignore",
     "jshint": "jshint gitignorer.js lib/*"
   },
   "repository": {

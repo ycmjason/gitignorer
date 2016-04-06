@@ -32,14 +32,14 @@ program
   .command('remove <files...>')
   .alias('rm')
   .description('Remove ignored file from .gitignore or [profile]')
-  .option('-t, --profile [profile]', 'which profile to list')
+  .option('-p, --profile [profile]', 'which profile to list')
   .action(handlers.remove);
  
 program
   .command('list')
   .alias('ls')
   .description('List ignored file in .gitignore or [profile]')
-  .option('-t, --profile [profile]', 'which profile to list')
+  .option('-p, --profile [profile]', 'which profile to list')
   .action(handlers.list);
 
 program
