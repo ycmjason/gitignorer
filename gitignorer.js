@@ -16,10 +16,14 @@ var db = require('filesys-db')();
 var profiles = db.getCollection('profiles');
 
 if(profiles == null){
+
   profiles = db.createCollection('profiles');
   profiles.put({name: 'default', ignored_files: []}, main);
 }else{
-  main();
+  profiles.findOne({name: 'default'}, (p) => {
+    if(!p) profiles.put({name:'default', ignored_files:[]}, main);
+    else main();
+  });
 }
 
 function main(){

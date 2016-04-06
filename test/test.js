@@ -39,6 +39,7 @@ function assertProfile(name, expect, done){
 describe('gitignorer', function(){
 
   afterEach(function(done){
+    // after each test, we remove .gitignore and all profiles inc. default
     fs.stat('.gitignore', (err) => {
       if(err) return done();
       fs.unlink('.gitignore', profiles.remove.bind(profiles, {}, () => {

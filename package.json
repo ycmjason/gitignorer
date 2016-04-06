@@ -34,7 +34,8 @@
     "mocha": "^2.4.5"
   },
   "bin": {
-    "gitignorer": "gitignore.js"
+    "gitignorer": "gitignore.js",
+    "gitignore": "gitignore.js"
   },
   "jshintConfig": {
     "esversion": 6,
