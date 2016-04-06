@@ -10,11 +10,21 @@ npm install -g gitignorer
 ```
 
 ## Usage
-gitignorer handles **two, and only two**, things. 
+gitignorer perform operations over  **two, and only two**, things.
 
 1. **`.gitignore`** on your current directory
+  - [create `.gitignore` with preset profiles](#gitignore-init)
+  - [add files/patterns to `.gitignore`](#gitignore-add)
+  - [remove files/patterns from `.gitignore`](#gitignore-remove--rm)
+  - [list files/patterns in `.gitignore`](#gitignore-list--ls)
 2. Different **profiles** that you create
-  - the only "must have" profile is the "default" profile.
+  - [add files/patterns to profile](#gitignore-add)
+  - [remove files/patterns from profile](#gitignore-remove--rm)
+  - [list files/patterns in profile](#gitignore-list--ls)
+  - [create a new profile](#gitignore-init)
+  - [delete a profile](#gitignore-init)
+  - [copy a profile](#gitignore-init)
+  - [rename a profile](#gitignore-init)
 
 ### `gitignore init`
 `gitignore init` creates `.gitignore`.
@@ -72,6 +82,8 @@ coffee
 
 ### `gitignore profile`
 `gitignore profile` manges your profiles.
+
+> The 'default' profile shouldn't be renamed/removed.
 
 ```bash
 # list all existing profiles (--list/-l)
