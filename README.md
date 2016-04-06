@@ -12,15 +12,13 @@ npm install -g gitignorer
 ## Usage
 Listed below are all the operations that `gitignorer` capable to perform.
 
-1. **`.gitignore`**
+1. Generating `.gitignore` with an existing profile
   - [create `.gitignore` with preset profiles](#gitignore-init)
-  - [add files/patterns to `.gitignore`](#gitignore-add)
-  - [remove files/patterns from `.gitignore`](#gitignore-remove--rm)
-  - [list files/patterns in `.gitignore`](#gitignore-list--ls)
-2. Profiles
-  - [add files/patterns to profile](#gitignore-add)
-  - [remove files/patterns from profile](#gitignore-remove--rm)
-  - [list files/patterns in profile](#gitignore-list--ls)
+2. Managing files to be ignored
+  - [add files/patterns to `.gitignore` or a profile](#gitignore-add)
+  - [remove files/patterns from `.gitignore` or a profile](#gitignore-remove--rm)
+  - [list files/patterns in `.gitignore` or a profile](#gitignore-list--ls)
+3. Manging Profiles
   - [create a new profile](#gitignore-init)
   - [delete a profile](#gitignore-init)
   - [copy a profile](#gitignore-init)
