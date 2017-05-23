@@ -1,11 +1,12 @@
+
 # gitignorer
 Creates `.gitignore` for you with your very own settings.
-Have you ever *feel irritated* when you have to add **the same freaking set of files/patterns** like `.*.sw*`, `.DS_Store`, `node_modules` to `.gitignore` every time you start a new project? 
+Have you ever *feel irritated* when you have to add **the same freaking set of files/patterns** like `.*.sw*`, `.DS_Store`, `node_modules` to `.gitignore` every time you start a new project?
 
 Today, with *gitignorer*, no more worries! :)
 
 ## Abstract
-1. `gitignorer` allow you to interact with your `.gitignore` easily. 
+1. `gitignorer` allow you to interact with your `.gitignore` easily.
 	- [add files/patterns](#gitignore-add)
 	- [remove files/patterns](#gitignore-remove--rm)
 	- [list files/patterns](#gitignore-list--ls)
@@ -19,7 +20,7 @@ npm install -g gitignorer
 ```
 
 ## Profiles (`~/.gitignore.profiles.js`)
-`gitignorer` looks into `~/.gitignore.profiles.js` which should export profiles. 
+`gitignorer` looks into `~/.gitignore.profiles.js` which should export profiles.
 
 A simple example that defines the `default` profile:
 ```javascript
@@ -40,17 +41,22 @@ var node = [
 ];
 
 var java = [
-  '*.class',
-  '*.jar'
+  'url: https://raw.githubusercontent.com/github/gitignore/master/Java.gitignore',
+  '.object2'
 ];
 
 // Use Array.prototype.concat() to inherit from other profiles
 module.exports = {
   default: common,
   node: common.concat(node),
-  java: common.concat(java)
+  java: common.concat(java),
+  awesome: commone.concat(node).concat(java)
 };
 ```
+
+Note that you could attach an url with any gitignore template. A very nice repository provides loads of templates available: [github/gitignore](https://github.com/github/gitignore).
+
+**Urls entry should start with `"url: "`. Notice the space after `:`.**
 
 ## Usage
 
@@ -146,7 +152,7 @@ subcommands help:
 
 ```
 
-## Did you know? 
+## Did you know?
 - You can use `gitignore` or `gitignorer` to invoke gitignorer.
 - `gitignore profiles` is equivalent to `gitignorer profiles`
 
