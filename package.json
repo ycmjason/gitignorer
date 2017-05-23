@@ -1,13 +1,10 @@
 {
   "name": "gitignorer",
-  "version": "v0.1.0",
+  "version": "v0.1.1",
   "description": "Creates .gitignore with your very own settings.",
   "main": "gitignorer.js",
   "scripts": {
-    "pretest": "rm -f .gitignore",
-    "test": "mocha || exit 0",
-    "posttest": "git checkout .gitignore",
-    "jshint": "jshint gitignorer.js lib/*"
+    "test": "exit -1"
   },
   "repository": {
     "type": "git",
@@ -25,18 +22,11 @@
   "homepage": "https://github.com/ycmjason/gitignorer#readme",
   "dependencies": {
     "commander": "^2.9.0",
-    "msg-generator": "^0.1.1"
-  },
-  "devDependencies": {
-    "jshint": "^2.9.1",
-    "mocha": "^2.4.5"
+    "msg-generator": "^0.1.1",
+    "request": "^2.81.0"
   },
   "bin": {
     "gitignorer": "./gitignorer.js",
     "gitignore": "./gitignorer.js"
-  },
-  "jshintConfig": {
-    "esversion": 6,
-    "node": true
   }
 }
