@@ -1,3 +1,5 @@
+# created by gitignorer
+# profile used: node
 *.sw*
 .DS_Store
 node_modules

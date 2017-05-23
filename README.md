@@ -4,105 +4,108 @@ Have you ever *feel irritated* when you have to add **the same freaking set of f
 
 Today, with *gitignorer*, no more worries! :)
 
+## Abstract
+1. `gitignorer` allow you to interact with your `.gitignore` easily. 
+	- [add files/patterns](#gitignore-add)
+	- [remove files/patterns](#gitignore-remove--rm)
+	- [list files/patterns](#gitignore-list--ls)
+2. `gitignorer` also allow you to create `.gitignore` with predefined settings (profiles) exported from `~/.gitignore.profiles.js`.
+	- [create .gitignore with preset profiles](#gitignore-init)
+	- [list profiles exported from ~/.gitignore.config.js](#gitignore-profiles)
+
 ## Installation
 ```
 npm install -g gitignorer
 ```
 
-## Usage
-Listed below are all the operations that `gitignorer` capable to perform.
+## Profiles (`~/.gitignore.profiles.js`)
+`gitignorer` looks into `~/.gitignore.profiles.js` which should export profiles. 
 
-1. Generating `.gitignore` with an existing profile
-  - [create `.gitignore` with preset profiles](#gitignore-init)
-2. Managing files to be ignored
-  - [add files/patterns to `.gitignore` or a profile](#gitignore-add)
-  - [remove files/patterns from `.gitignore` or a profile](#gitignore-remove--rm)
-  - [list files/patterns in `.gitignore` or a profile](#gitignore-list--ls)
-3. Manging Profiles
-  - [create a new profile](#gitignore-init)
-  - [delete a profile](#gitignore-init)
-  - [copy a profile](#gitignore-init)
-  - [rename a profile](#gitignore-init)
+A simple example that defines the `default` profile:
+```javascript
+module.exports = {
+  default: ['*.sw*', '.DS_Store']
+};
+```
+
+A more complicated example:
+```javascript
+var common = [
+  '*.sw*',
+  '.DS_Store'
+];
+
+var node = [
+  'node_modules',
+];
+
+var java = [
+  '*.class',
+  '*.jar'
+];
+
+// Use Array.prototype.concat() to inherit from other profiles
+module.exports = {
+  default: common,
+  node: common.concat(node),
+  java: common.concat(java)
+};
+```
+
+## Usage
 
 ### `gitignore init`
 `gitignore init` creates `.gitignore`.
 ```bash
-# create .gitignore with "default" profile
+# create .gitignore with "default" profile or empty profile
 > gitignore init
 
-# create .gitignore with "nodeDev" profile
-> gitignore init -p nodeDev
+# create .gitignore with "node" profile
+> gitignore init node
 ```
 
-> You can use `--profile` instead of `-p` if you wish.
-
 ### `gitignore add`
-`gitignore add` adds files/patterns to `.gitignore` or profile.
+`gitignore add` adds files/patterns to `.gitignore`.
 ```bash
 # add node_modules to .gitignore
 > gitignore add node_modules
 
-# add *.class and *.jar to 'java' profile
-> gitignore add -p java *.class *.jar
+# add *.class and *.jar to 'java' .gitignore
+> gitignore add '*.class' '*.jar'
 ```
+Use quote when using wildcards(*) to avoid expansion of filenames;
 
 ### `gitignore remove | rm`
-`gitignore remove`, with alias `gitignore rm`, removes files/patterns from `.gitignore` or profile.
+`gitignore remove`, with alias `gitignore rm`, removes files/patterns from `.gitignore`.
 ```bash
 # remove node_modules and lib/*.js from .gitignore
-> gitignore remove node_modules lib/*.js
+> gitignore remove node_modules 'lib/*.js'
 
-# remove *.pyc from 'C' profile
-> gitignore rm *.pyc -p C
+# remove *.pyc
+> gitignore rm *.pyc
 ```
-
-> Notice that you can put your flag anywhere. Thanks to [commander](https://www.npmjs.com/package/commander).
 
 ### `gitignore list | ls`
-`gitignore list`, with alias `gitignore ls`, list files/patterns from `.gitignore` or profile.
+`gitignore list`, with alias `gitignore ls`, lists files/patterns from `.gitignore`.
 ```bash
-> gitignore ls # list files from .gitignore
-# created by gitignorer
-# profile used: default
+> gitignore ls
 *.sw*
-
-> gitignore list -p angularjs # list files from 'angularjs' profile
-node_modules
-bower_components
-
-# alias command to `gitignore profile --list`
-> gitignore list -p
-default
-angularjs
-node
-coffee
+.DS_Store
 ```
 
-### `gitignore profile`
-`gitignore profile` manges your profiles.
-
-> The 'default' profile shouldn't be renamed/removed.
+### `gitignore profiles`
+`gitignore profiles` lists all profiles and their corresponding files.
 
 ```bash
-# list all existing profiles (--list/-l)
-> gitignore profile -l
-default
-happytree
-i_hate_typing_markdown
+> gitignore profiles
+default:
+  *.sw*
+  .DS_Store
 
-# create a profile (--create/-c)
-> gitignore profile --create java
-
-# delete a profile (--delete/-d)
-> gitignore profile --delete typescript
-
-# copy a profile (--copy)
-# here we copy 'node' to 'angularjs' profile
-> gitignore profile node --copy angularjs
-
-# move/rename a profile (--move)
-# here we move 'jave' to 'java' profile
-> gitignore profile jave --move java
+node:
+  *.sw*
+  .DS_Store
+  node_modules
 ```
 
 ### Help `-h | --help`
@@ -112,16 +115,16 @@ Every command comes with a help menu. For examples:
 ```
 > gitignore -h
 
-  Usage: gitignore [options] [command]
+  Usage: gitignorer [options] [command]
 
 
   Commands:
 
-    init [options] [profile]        Create .gitignore at current directory
-    add [options] <files...>        Add file(s) to .gitignore
-    remove|rm [options] <files...>  Remove ignored file from .gitignore or [profile]
-    list|ls [options]               List ignored file in .gitignore or [profile]
-    profile [options] <name>        Perform operation on profile base on [options]
+    init [options] [profile]  Create .gitignore at current directory
+    add <files...>            Add file(s) to .gitignore
+    remove|rm <files...>      Remove ignored file from .gitignore
+    list|ls                   List ignored file in .gitignore
+    profiles|profile          List all profiles and their corresponding files
 
   Options:
 
@@ -139,13 +142,16 @@ subcommands help:
 
   Options:
 
-    -h, --help               output usage information
-    -p, --profile [profile]  add file to profile instead of .gitignore
+    -h, --help  output usage information
+
 ```
 
 ## Did you know? 
 - You can use `gitignore` or `gitignorer` to invoke gitignorer.
-  - `gitignore profile -l` is equivalent to `gitignorer profile -l`
+- `gitignore profiles` is equivalent to `gitignorer profiles`
+
+## Author
+Jason Yu
 
 ## License
 MIT
