@@ -8,7 +8,8 @@
     "gitignore": "./bin/gitignorer.js"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "coverage": "codecov"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "homepage": "https://github.com/ycmjason/gitignorer#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "codecov": "^3.0.0",
     "commander": "^2.14.1",
     "lodash.uniq": "^4.5.0",
     "msg-generator": "^0.1.1"
