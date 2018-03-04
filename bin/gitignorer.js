@@ -1,45 +1,42 @@
 #!/usr/bin/env node
-'use strict';
-//Ever feel irritating when you have to create a .gitignore file with the exact same setting over and over again when you start a new project? 
+const program = require('commander');
 
-var program = require('commander');
-
-var handlers = require('./lib/handlers'); 
+const controllers = require('../lib/controllers'); 
 
 program
-  .version(require('./package.json').version);
+  .version(require('../package.json').version);
 
 program
   .command('init [profile]')
   .description('Create .gitignore at current directory')
   .option('-f, --force', 'overwrite the existing .gitignore')
-  .action(handlers.init);
+  .action(controllers.init);
  
 program
   .command('add <files...>')
   .description('Add file(s) to .gitignore')
-  .action(handlers.add);
+  .action(controllers.add);
 
 program
   .command('remove <files...>')
   .alias('rm')
   .description('Remove ignored file from .gitignore')
-  .action(handlers.remove);
+  .action(controllers.remove);
  
 program
   .command('list')
   .alias('ls')
   .description('List ignored file in .gitignore')
-  .action(handlers.list);
+  .action(controllers.list);
 
 program
   .command('profiles')
   .alias('profile')
   .description('List all profiles and their corresponding files')
-  .action(handlers.profile);
+  .action(controllers.profile);
 
 program.parse(process.argv);
 
-if (!process.argv.slice(2).length) {
-  program.outputHelp();
+if (process.argv.length <= 2) {
+  program.help();
 }
