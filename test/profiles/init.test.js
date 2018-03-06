@@ -7,14 +7,12 @@ const {
   emptyDirSync,
 } = require('fs-extra');
 
-const TEST_DIR = path.join(os.tmpdir(), 'test-initProfiles');
-const GITIGNORE_PROFILES_PATH = path.join(TEST_DIR, 'gitignore_profiles.js');
+const {
+  createGitignoreProfiles,
+  beforeEachCreateHomeAndCreateCwdAtNthLevelDeep_afterAllRemoveAll,
+} = require('../helpers');
 
 const initProfiles = require('../../lib/profiles/init');
-
-const prepareGitignoreProfiles = (path, profiles) => {
-  writeFileSync(path, `module.exports = ${JSON.stringify(profiles)};`);
-};
 
 const specs = [
   {
@@ -122,23 +120,28 @@ hs_err_pid*
 
 describe('initProfiles', () => {
   beforeEach(jest.resetModules);
-  beforeEach(() => emptyDirSync(TEST_DIR));
+  const {
+    home,
+    cwd,
+  } = beforeEachCreateHomeAndCreateCwdAtNthLevelDeep_afterAllRemoveAll(24);
 
-  afterAll(() => removeSync(TEST_DIR));
+  const gitignore_profiles_path = path.join(home, '.gitignore.profiles.js');
 
   specs.forEach(({
     desc,
-    args = [GITIGNORE_PROFILES_PATH],
+    args = [gitignore_profiles_path],
     gitignore_profiles,
     expectProfile,
     toResolveTo
   }) => {
-    test(desc, () => {
+    test(desc, async () => {
       if (gitignore_profiles) {
-        prepareGitignoreProfiles(GITIGNORE_PROFILES_PATH, gitignore_profiles);
+        createGitignoreProfiles(home, gitignore_profiles);
       }
 
-      return expect(initProfiles(...args)[expectProfile]).resolves.toEqual(toResolveTo);
+      const profilesProxy = initProfiles(...args);
+
+      return expect(await profilesProxy[expectProfile]).toEqual(toResolveTo);
     });
   });
 

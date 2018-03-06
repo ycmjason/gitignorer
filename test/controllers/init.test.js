@@ -9,7 +9,7 @@ const logger = require('../../lib/logger');
 const {
   createGitignoreProfiles,
   beforeEachCreateHomeAndCreateCwdAtNthLevelDeep_afterAllRemoveAll,
-} = require('./helpers');
+} = require('../helpers');
 
 const initController = require('../../lib/controllers/init');
 
