@@ -1,22 +1,88 @@
-
 # gitignorer
-Creates `.gitignore` for you with your very own settings.
-Have you ever *feel irritated* when you have to add **the same freaking set of files/patterns** like `.*.sw*`, `.DS_Store`, `node_modules` to `.gitignore` every time you start a new project?
 
-Today, with *gitignorer*, no more worries! :)
+[![Build Status](https://travis-ci.org/ycmjason/gitignorer.svg?branch=master)](https://travis-ci.org/ycmjason/gitignorer)
+[![codecov](https://codecov.io/gh/ycmjason/gitignorer/branch/master/graph/badge.svg)](https://codecov.io/gh/ycmjason/gitignorer)
+
+Creates `.gitignore` for you with your very own profiles.
+
+No more copy and pasting people's `.gitignore`. Start building your profiles!
 
 ## Abstract
-1. `gitignorer` allow you to interact with your `.gitignore` easily.
-	- [add files/patterns](#gitignore-add)
-	- [remove files/patterns](#gitignore-remove--rm)
-	- [list files/patterns](#gitignore-list--ls)
-2. `gitignorer` also allow you to create `.gitignore` with predefined settings (profiles) exported from `~/.gitignore.profiles.js`.
-	- [create .gitignore with preset profiles](#gitignore-init)
-	- [list profiles exported from ~/.gitignore.config.js](#gitignore-profiles)
+gitignorer has only two commands, yet they are very convenient:
+1. [`gitignore init [profile]`](#gitignore-init)
+2. [`gitignore profiles`](#gitignore-profiles)
 
 ## Installation
 ```
 npm install -g gitignorer
+```
+
+## Usage
+
+### `gitignore init [profile]`
+`gitignore init` creates `.gitignore` with the given profile.
+```bash
+# create .gitignore with "default" profile or empty profile
+> gitignore init
+
+# create .gitignore with "node" profile
+> gitignore init node
+```
+
+### `gitignore profiles`
+`gitignore profiles` lists the profiles exported by `~/.gitignore.profiles.js`.
+
+```
+> gitignore profiles
+
+ default
+  |- *.sw*
+  |- .DS_Store
+
+ node
+  |- *.sw*
+  |- .DS_Store
+  |- node_modules
+  |- npm-debug.log*
+
+You can create a `.gitignore` using `gitignore init [profile]`
+```
+
+### `gitignore -h`
+`gitignore` help:
+```
+> gitignore -h
+
+  Usage: gitignorer [options] [command]
+
+
+  Options:
+
+    -V, --version  output the version number
+    -h, --help     output usage information
+
+
+  Commands:
+
+    init [options] [profile]  Create .gitignore at current directory
+    profiles                  List all profiles and their corresponding files
+
+```
+
+subcommands help:
+```
+> gitignore init --help
+
+  Usage: init [options] [profile]
+
+  Create .gitignore at current directory
+
+
+  Options:
+
+    -f, --force  overwrite the existing .gitignore
+    -h, --help   output usage information
+
 ```
 
 ## Profiles (`~/.gitignore.profiles.js`)
@@ -31,130 +97,31 @@ module.exports = {
 
 A more complicated example:
 ```javascript
-var common = [
+const common = [
   '*.sw*',
   '.DS_Store'
 ];
 
-var node = [
+const node = [
   'node_modules',
 ];
 
-var java = [
+const java = [
   'url: https://raw.githubusercontent.com/github/gitignore/master/Java.gitignore',
   '.object2'
 ];
 
-// Use Array.prototype.concat() to inherit from other profiles
 module.exports = {
   default: common,
-  node: common.concat(node),
-  java: common.concat(java),
-  awesome: commone.concat(node).concat(java)
+  node: [...common, ...node],
+  java: [...common, ...java],
+  awesome: [...common, ...node, ...java],
 };
 ```
 
 Note that you could attach an url with any gitignore template. A very nice repository provides loads of templates available: [github/gitignore](https://github.com/github/gitignore).
 
-**Urls entry should start with `"url: "`. Notice the space after `:`.**
-
-## Usage
-
-### `gitignore init`
-`gitignore init` creates `.gitignore`.
-```bash
-# create .gitignore with "default" profile or empty profile
-> gitignore init
-
-# create .gitignore with "node" profile
-> gitignore init node
-```
-
-### `gitignore add`
-`gitignore add` adds files/patterns to `.gitignore`.
-```bash
-# add node_modules to .gitignore
-> gitignore add node_modules
-
-# add *.class and *.jar to 'java' .gitignore
-> gitignore add '*.class' '*.jar'
-```
-Use quote when using wildcards(*) to avoid expansion of filenames;
-
-### `gitignore remove | rm`
-`gitignore remove`, with alias `gitignore rm`, removes files/patterns from `.gitignore`.
-```bash
-# remove node_modules and lib/*.js from .gitignore
-> gitignore remove node_modules 'lib/*.js'
-
-# remove *.pyc
-> gitignore rm *.pyc
-```
-
-### `gitignore list | ls`
-`gitignore list`, with alias `gitignore ls`, lists files/patterns from `.gitignore`.
-```bash
-> gitignore ls
-*.sw*
-.DS_Store
-```
-
-### `gitignore profiles`
-`gitignore profiles` lists all profiles and their corresponding files.
-
-```bash
-> gitignore profiles
-default:
-  *.sw*
-  .DS_Store
-
-node:
-  *.sw*
-  .DS_Store
-  node_modules
-```
-
-### Help `-h | --help`
-Every command comes with a help menu. For examples:
-
-`gitignore` help:
-```
-> gitignore -h
-
-  Usage: gitignorer [options] [command]
-
-
-  Commands:
-
-    init [options] [profile]  Create .gitignore at current directory
-    add <files...>            Add file(s) to .gitignore
-    remove|rm <files...>      Remove ignored file from .gitignore
-    list|ls                   List ignored file in .gitignore
-    profiles|profile          List all profiles and their corresponding files
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-```
-
-subcommands help:
-```
-> gitignore add --help
-
-  Usage: add [options] <files...>
-
-  Add file(s) to .gitignore
-
-  Options:
-
-    -h, --help  output usage information
-
-```
-
-## Did you know?
-- You can use `gitignore` or `gitignorer` to invoke gitignorer.
-- `gitignore profiles` is equivalent to `gitignorer profiles`
+**Urls entry should start with `"url: "`.**
 
 ## Author
 Jason Yu

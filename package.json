@@ -2,9 +2,14 @@
   "name": "gitignorer",
   "version": "v0.1.2",
   "description": "Creates .gitignore with your very own settings.",
-  "main": "gitignorer.js",
+  "main": "bin/gitignorer.js",
+  "bin": {
+    "gitignorer": "./bin/gitignorer.js",
+    "gitignore": "./bin/gitignorer.js"
+  },
   "scripts": {
-    "test": "exit -1"
+    "test": "jest",
+    "coverage": "codecov"
   },
   "repository": {
     "type": "git",
@@ -21,12 +26,15 @@
   },
   "homepage": "https://github.com/ycmjason/gitignorer#readme",
   "dependencies": {
-    "commander": "^2.9.0",
-    "msg-generator": "^0.1.1",
-    "request": "^2.81.0"
+    "axios": "^0.18.0",
+    "chalk": "^2.3.2",
+    "codecov": "^3.0.0",
+    "commander": "^2.14.1",
+    "lodash.uniq": "^4.5.0",
+    "msg-generator": "^0.1.1"
   },
-  "bin": {
-    "gitignorer": "./gitignorer.js",
-    "gitignore": "./gitignorer.js"
+  "devDependencies": {
+    "fs-extra": "^5.0.0",
+    "jest": "^22.4.2"
   }
 }
