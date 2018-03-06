@@ -1,6 +1,6 @@
 {
   "name": "gitignorer",
-  "version": "v0.1.2",
+  "version": "1.0.0",
   "description": "Creates .gitignore with your very own settings.",
   "main": "bin/gitignorer.js",
   "bin": {
