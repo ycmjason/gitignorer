@@ -32,7 +32,7 @@ npm install -g gitignorer
 ### `gitignore profiles`
 `gitignore profiles` lists the profiles exported by `~/.gitignore.profiles.js`.
 
-```bash
+```
 > gitignore profiles
 
  default
